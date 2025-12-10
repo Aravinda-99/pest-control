@@ -46,6 +46,19 @@
     border-radius: 20px;
     margin-bottom: 20px;
     letter-spacing: 0.5px;
+    opacity: 0;
+    transform: scale(0) rotate(-180deg);
+    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .pest-best-pill.animate {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+
+  .pest-best-pill:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 5px 15px rgba(46, 125, 50, 0.4);
   }
 
   /* Main Title */
@@ -55,10 +68,32 @@
     line-height: 1.2;
     margin: 0 0 20px 0;
     color: var(--pest-best-dark);
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+  }
+
+  .pest-best-title.animate {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .pest-best-highlight {
     color: var(--pest-best-green);
+    display: inline-block;
+    opacity: 0;
+    transform: translateX(-30px) scale(0.8);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
+  }
+
+  .pest-best-highlight.animate {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+
+  .pest-best-title:hover .pest-best-highlight {
+    transform: translateX(5px) scale(1.05);
+    text-shadow: 0 0 10px rgba(46, 125, 50, 0.3);
   }
 
   /* Description */
@@ -67,6 +102,14 @@
     line-height: 1.6;
     color: var(--pest-best-gray);
     margin: 0;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.6s;
+  }
+
+  .pest-best-desc.animate {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   /* --- Grid Layout --- */
@@ -83,15 +126,24 @@
     padding: 40px 30px;
     border-radius: 20px; /* Rounded corners like image */
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    opacity: 0;
+    transform: translateY(60px) rotateX(20deg);
+    perspective: 1000px;
+  }
+
+  .pest-best-card.animate {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
   }
 
   .pest-best-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    transform: translateY(-10px) rotateY(5deg) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    background-color: #ffffff;
   }
 
   /* Icon Circle */
@@ -104,12 +156,51 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 25px;
+    transform: scale(0) rotate(-180deg);
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pest-best-icon-box.animate {
+    transform: scale(1) rotate(0deg);
+  }
+
+  .pest-best-card:hover .pest-best-icon-box {
+    transform: scale(1.15) rotate(360deg);
+    box-shadow: 0 8px 20px rgba(46, 125, 50, 0.4);
+    background-color: #1B5E20;
+  }
+
+  .pest-best-icon-box::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.5s, height 0.5s;
+  }
+
+  .pest-best-card:hover .pest-best-icon-box::before {
+    width: 100px;
+    height: 100px;
   }
 
   .pest-best-icon-box svg {
     width: 28px;
     height: 28px;
     fill: #ffffff;
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pest-best-card:hover .pest-best-icon-box svg {
+    transform: scale(1.2) rotate(10deg);
   }
 
   .pest-best-card-title {
@@ -117,6 +208,12 @@
     font-weight: 700;
     margin: 0 0 15px 0;
     color: var(--pest-best-dark);
+    transition: all 0.3s ease;
+  }
+
+  .pest-best-card:hover .pest-best-card-title {
+    color: var(--pest-best-green);
+    transform: translateX(5px);
   }
 
   .pest-best-card-text {
@@ -143,6 +240,40 @@
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     position: relative;
     overflow: hidden;
+    opacity: 0;
+    transform: translateX(60px) scale(0.9);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .pest-best-cta-card.animate {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+
+  .pest-best-cta-card:hover {
+    transform: translateX(-5px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  }
+
+  /* Shimmer effect for CTA card */
+  .pest-best-cta-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    transition: left 0.8s ease;
+  }
+
+  .pest-best-cta-card:hover::before {
+    left: 100%;
   }
 
   .pest-best-cta-title {
@@ -151,6 +282,12 @@
     line-height: 1.3;
     margin: 0 0 30px 0;
     color: #ffffff;
+    transition: all 0.3s ease;
+  }
+
+  .pest-best-cta-card:hover .pest-best-cta-title {
+    transform: translateY(-3px);
+    text-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
   }
 
   .pest-best-cta-label {
@@ -181,12 +318,34 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: phonePulse 2s infinite;
+  }
+
+  @keyframes phonePulse {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.7);
+    }
+    50% {
+      box-shadow: 0 0 0 10px rgba(46, 125, 50, 0);
+    }
+  }
+
+  .pest-best-phone-btn:hover .pest-best-phone-icon {
+    transform: scale(1.2) rotate(360deg);
+    background-color: #1B5E20;
+    box-shadow: 0 0 20px rgba(46, 125, 50, 0.6);
   }
 
   .pest-best-phone-icon svg {
     width: 16px;
     height: 16px;
     fill: #ffffff;
+  }
+
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
   }
 
   /* Responsive Design */
@@ -268,3 +427,133 @@
     </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const section = document.querySelector('.pest-best-section');
+    const pill = document.querySelector('.pest-best-pill');
+    const title = document.querySelector('.pest-best-title');
+    const highlight = document.querySelector('.pest-best-highlight');
+    const desc = document.querySelector('.pest-best-desc');
+    const cards = document.querySelectorAll('.pest-best-card');
+    const ctaCard = document.querySelector('.pest-best-cta-card');
+    const iconBoxes = document.querySelectorAll('.pest-best-icon-box');
+
+    if (!section) return;
+
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Animate pill
+          if (pill) {
+            setTimeout(() => {
+              pill.classList.add('animate');
+            }, 100);
+          }
+
+          // Animate title
+          if (title) {
+            setTimeout(() => {
+              title.classList.add('animate');
+            }, 300);
+          }
+
+          // Animate highlight
+          if (highlight) {
+            setTimeout(() => {
+              highlight.classList.add('animate');
+            }, 500);
+          }
+
+          // Animate description
+          if (desc) {
+            setTimeout(() => {
+              desc.classList.add('animate');
+            }, 700);
+          }
+
+          // Animate cards with stagger
+          cards.forEach((card, index) => {
+            setTimeout(() => {
+              card.classList.add('animate');
+              
+              // Animate icon after card
+              const iconBox = card.querySelector('.pest-best-icon-box');
+              if (iconBox) {
+                setTimeout(() => {
+                  iconBox.classList.add('animate');
+                }, 200);
+              }
+            }, 900 + (index * 150));
+          });
+
+          // Animate CTA card last
+          if (ctaCard) {
+            setTimeout(() => {
+              ctaCard.classList.add('animate');
+            }, 900 + (cards.length * 150) + 200);
+          }
+
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    observer.observe(section);
+
+    // Enhanced hover effects
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+      });
+    });
+
+    // Add click ripple effect to cards
+    cards.forEach(card => {
+      card.addEventListener('click', function(e) {
+        const ripple = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        ripple.style.position = 'absolute';
+        ripple.style.borderRadius = '50%';
+        ripple.style.background = 'rgba(46, 125, 50, 0.2)';
+        ripple.style.transform = 'scale(0)';
+        ripple.style.animation = 'ripple-animation 0.6s ease-out';
+        ripple.style.pointerEvents = 'none';
+        ripple.style.zIndex = '10';
+        
+        this.style.position = 'relative';
+        this.style.overflow = 'hidden';
+        this.appendChild(ripple);
+        
+        setTimeout(() => {
+          ripple.remove();
+        }, 600);
+      });
+    });
+
+    // Add ripple animation keyframes
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes ripple-animation {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  });
+</script>

@@ -178,6 +178,7 @@
             flex: 1;
             position: relative;
             max-height: 353px; /* Limit image column height on desktop */
+            overflow: hidden;
         }
 
         .pest-stats-main-img {
@@ -185,6 +186,39 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            opacity: 0;
+            transform: scale(1.2) translateX(-30px);
+            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: grayscale(0.3);
+        }
+
+        .pest-stats-col-img.animate .pest-stats-main-img {
+            opacity: 1;
+            transform: scale(1) translateX(0);
+            filter: grayscale(0);
+        }
+
+        .pest-stats-col-img:hover .pest-stats-main-img {
+            transform: scale(1.05);
+            filter: grayscale(0) brightness(1.1);
+        }
+
+        /* Image overlay effect */
+        .pest-stats-col-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(14, 61, 107, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            pointer-events: none;
+        }
+
+        .pest-stats-col-img:hover::after {
+            opacity: 1;
         }
 
         /* --- Right Column (Content) --- */
@@ -199,10 +233,42 @@
             align-items: center;
             text-align: center;
             position: relative;
+            overflow: hidden;
             
             /* Subtle dotted pattern overlay */
             background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
             background-size: 20px 20px;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .pest-stats-col-content.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Animated background pattern */
+        .pest-stats-col-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: patternMove 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes patternMove {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            100% {
+                transform: translate(30px, 30px) rotate(360deg);
+            }
         }
 
         /* Stats Container */
@@ -220,6 +286,18 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            opacity: 0;
+            transform: translateY(40px) scale(0.8);
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .pest-stat-item.animate {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .pest-stat-item:hover {
+            transform: translateY(-10px) scale(1.05);
         }
 
         /* Icons */
@@ -227,6 +305,17 @@
             width: 50px;
             height: 50px;
             margin-bottom: 15px;
+            transform: scale(0) rotate(-180deg);
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+        }
+
+        .pest-stat-icon.animate {
+            transform: scale(1) rotate(0deg);
+        }
+
+        .pest-stat-item:hover .pest-stat-icon {
+            transform: scale(1.2) rotate(360deg);
         }
         
         .pest-stat-icon svg {
@@ -235,6 +324,31 @@
             fill: none;
             stroke: var(--pest-stats-white);
             stroke-width: 1.5;
+            transition: all 0.3s ease;
+        }
+
+        .pest-stat-item:hover .pest-stat-icon svg {
+            stroke-width: 2;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+        }
+
+        /* Icon glow effect */
+        .pest-stat-icon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: all 0.5s ease;
+        }
+
+        .pest-stat-item:hover .pest-stat-icon::after {
+            width: 80px;
+            height: 80px;
         }
 
         /* Numbers */
@@ -244,6 +358,16 @@
             line-height: 1;
             margin-bottom: 10px;
             display: block;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.8) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .pest-stat-item:hover .pest-stat-number {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
         }
 
         /* Labels */
@@ -252,6 +376,13 @@
             font-weight: 500;
             letter-spacing: 0.5px;
             opacity: 0.9;
+            transition: all 0.3s ease;
+        }
+
+        .pest-stat-item:hover .pest-stat-label {
+            opacity: 1;
+            transform: translateY(-3px);
+            letter-spacing: 1px;
         }
 
         /* Description Paragraph */
@@ -260,7 +391,14 @@
             line-height: 1.5;
             max-width: 600px;
             margin: 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
+        }
+
+        .pest-stats-desc.animate {
             opacity: 0.9;
+            transform: translateY(0);
         }
 
         /* --- Responsive Layout --- */
@@ -349,19 +487,19 @@
         
         <div class="pest-stats-counters">
         
-        <div class="pest-stat-item">
+        <div class="pest-stat-item" data-target="20">
             <div class="pest-stat-icon">
             <svg viewBox="0 0 24 24"><path d="M20 7h-5.2c-.62-1.17-1.84-2-3.25-2s-2.63.83-3.25 2H3v12h18V7zM11.5 6.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5S10 8.83 10 8s.67-1.5 1.5-1.5zm-7 11V8.5h2.7c.2.51.52.97.91 1.35.78.78 1.86 1.25 3.04 1.25s2.26-.47 3.04-1.25c.39-.39.71-.85.91-1.35h2.7v8.5H4.5z"/><circle cx="12" cy="12" r="1.5"/></svg>
             </div>
-            <span class="pest-stat-number">20+</span>
+            <span class="pest-stat-number">0</span>
             <span class="pest-stat-label">Experts</span>
         </div>
 
-        <div class="pest-stat-item">
+        <div class="pest-stat-item" data-target="1500">
             <div class="pest-stat-icon">
             <svg viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm0 13c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/><path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
             </div>
-            <span class="pest-stat-number">1500+</span>
+            <span class="pest-stat-number">0</span>
             <span class="pest-stat-label">Satisfied Clients</span>
         </div>
 
@@ -544,6 +682,99 @@
             updateHeroBackground(); // Load first image to ensure fade setup
             runHeroStagger();
             startTimer(); // Start auto-play
+        });
+
+        // Pest Stats Section Animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const statsSection = document.querySelector('.pest-stats-section');
+            const imgCol = document.querySelector('.pest-stats-col-img');
+            const contentCol = document.querySelector('.pest-stats-col-content');
+            const statItems = document.querySelectorAll('.pest-stat-item');
+            const statIcons = document.querySelectorAll('.pest-stat-icon');
+            const desc = document.querySelector('.pest-stats-desc');
+
+            if (!statsSection) return;
+
+            // Intersection Observer for scroll animations
+            const observerOptions = {
+                threshold: 0.3,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Animate image column
+                        if (imgCol) {
+                            imgCol.classList.add('animate');
+                        }
+
+                        // Animate content column
+                        if (contentCol) {
+                            contentCol.classList.add('animate');
+                        }
+
+                        // Animate stat items with stagger
+                        statItems.forEach((item, index) => {
+                            setTimeout(() => {
+                                item.classList.add('animate');
+                                
+                                // Animate icon
+                                const icon = item.querySelector('.pest-stat-icon');
+                                if (icon) {
+                                    setTimeout(() => {
+                                        icon.classList.add('animate');
+                                    }, 200);
+                                }
+
+                                // Start counter animation
+                                const numberEl = item.querySelector('.pest-stat-number');
+                                const target = parseInt(item.getAttribute('data-target'));
+                                
+                                if (numberEl && target) {
+                                    animateCounter(numberEl, target, index * 300);
+                                }
+                            }, index * 300);
+                        });
+
+                        // Animate description
+                        if (desc) {
+                            setTimeout(() => {
+                                desc.classList.add('animate');
+                            }, 800);
+                        }
+
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            observer.observe(statsSection);
+
+            // Counter animation function
+            function animateCounter(element, target, delay) {
+                setTimeout(() => {
+                    let current = 0;
+                    const increment = target / 50;
+                    const suffix = target >= 1000 ? '+' : '+';
+                    
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        element.textContent = Math.floor(current) + suffix;
+                    }, 30);
+                }, delay);
+            }
+
+            // Enhanced hover effects
+            statItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                });
+            });
         });
     </script>
 </body>
