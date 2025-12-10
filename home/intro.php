@@ -42,6 +42,15 @@
     margin: 0 0 10px 0;
     line-height: 1.25;
     color: #1F2937;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .pest-wcu-col-left h2.animate,
+  .pest-wcu-col-right h2.animate {
+    opacity: 1;
+    transform: translateY(0);
   }
   
   .pest-wcu-col-left p,
@@ -50,6 +59,15 @@
     line-height: 1.6;
     margin: 0 0 30px 0;
     color: #666666;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+  }
+
+  .pest-wcu-col-left p.animate,
+  .pest-wcu-col-right p.animate {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   /* --- Left Column Elements --- */
@@ -66,6 +84,19 @@
     font-weight: 700;
     color: #1F2937;
     font-size: 15px;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .pest-wcu-list li.animate {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .pest-wcu-list li:hover {
+    transform: translateX(5px);
+    color: #00C853;
   }
   
   /* Orange Check Icon */
@@ -79,12 +110,28 @@
     border-radius: 50%;
     margin-right: 12px;
     flex-shrink: 0;
+    transform: scale(0) rotate(-180deg);
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .pest-wcu-check-icon.animate {
+    transform: scale(1) rotate(0deg);
+  }
+
+  .pest-wcu-list li:hover .pest-wcu-check-icon {
+    transform: scale(1.2) rotate(360deg);
+    background-color: #00C853;
   }
   
   .pest-wcu-check-icon svg {
     width: 10px;
     height: 10px;
     fill: #ffffff;
+    transition: transform 0.3s ease;
+  }
+
+  .pest-wcu-list li:hover .pest-wcu-check-icon svg {
+    transform: scale(1.1);
   }
   
   /* Green Button */
@@ -98,12 +145,41 @@
     text-decoration: none;
     font-weight: 700;
     font-size: 14px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+
+  .pest-wcu-btn.animate {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .pest-wcu-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+  }
+
+  .pest-wcu-btn:hover::before {
+    left: 100%;
   }
   
   .pest-wcu-btn:hover {
     background-color: #00a844;
-    transform: translateY(-2px);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 200, 83, 0.4);
+  }
+
+  .pest-wcu-btn:active {
+    transform: translateY(-1px) scale(1.02);
   }
   
   .pest-wcu-arrow-icon {
@@ -111,14 +187,26 @@
     width: 16px;
     height: 16px;
     fill: #fff;
+    transition: transform 0.3s ease;
+  }
+
+  .pest-wcu-btn:hover .pest-wcu-arrow-icon {
+    transform: translateX(5px);
   }
 
   /* --- Middle Column (Image) --- */
   .pest-wcu-img-wrap {
     position: relative;
     border-radius: 12px;
-    /* Optional shadow */
-    /* box-shadow: 0 20px 40px rgba(0,0,0,0.1); */
+    opacity: 0;
+    transform: scale(0.8) rotateY(-15deg);
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+    perspective: 1000px;
+  }
+
+  .pest-wcu-img-wrap.animate {
+    opacity: 1;
+    transform: scale(1) rotateY(0deg);
   }
   
   .pest-wcu-main-img {
@@ -126,6 +214,13 @@
     height: auto;
     display: block;
     border-radius: 12px;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: brightness(0.95);
+  }
+
+  .pest-wcu-img-wrap:hover .pest-wcu-main-img {
+    transform: scale(1.05);
+    filter: brightness(1);
   }
   
   /* Experience Badge */
@@ -139,6 +234,22 @@
     border-radius: 12px;
     text-align: center;
     box-shadow: 0 10px 20px rgba(0, 200, 83, 0.3);
+    opacity: 0;
+    transform: scale(0) rotate(-180deg);
+    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .pest-wcu-badge.animate {
+    opacity: 1;
+    transform: scale(1) rotate(0deg) translateY(0px);
+    animation: float 3s ease-in-out infinite 0.8s;
+  }
+
+  .pest-wcu-badge:hover {
+    transform: scale(1.1) rotate(5deg) translateY(0px);
+    box-shadow: 0 15px 30px rgba(0, 200, 83, 0.5);
+    animation-play-state: paused;
   }
   
   .pest-wcu-badge-num {
@@ -146,6 +257,11 @@
     font-size: 32px;
     font-weight: 800;
     line-height: 1;
+    transition: transform 0.3s ease;
+  }
+
+  .pest-wcu-badge:hover .pest-wcu-badge-num {
+    transform: scale(1.1);
   }
   
   .pest-wcu-badge-label {
@@ -153,6 +269,15 @@
     font-weight: 600;
     margin-top: 5px;
     display: block;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
   }
 
   /* --- Right Column Elements --- */
@@ -163,6 +288,22 @@
     background-color: #F3F4F6; /* Light gray background */
     padding: 20px;
     border-radius: 12px;
+    opacity: 0;
+    transform: translateX(50px) rotateY(-20deg);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    perspective: 1000px;
+    cursor: pointer;
+  }
+
+  .pest-wcu-feature-card.animate {
+    opacity: 1;
+    transform: translateX(0) rotateY(0deg);
+  }
+
+  .pest-wcu-feature-card:hover {
+    transform: translateX(-5px) translateY(-5px) rotateY(5deg);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
   }
   
   .pest-wcu-icon-box {
@@ -174,16 +315,32 @@
     align-items: center;
     margin-right: 15px;
     flex-shrink: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scale(0);
+  }
+
+  .pest-wcu-icon-box.animate {
+    transform: scale(1);
   }
   
   /* Specific Colors for right column icons */
   .pest-wcu-icon-green { background-color: #00C853; }
   .pest-wcu-icon-orange { background-color: #FF7043; }
   
+  .pest-wcu-feature-card:hover .pest-wcu-icon-box {
+    transform: scale(1.15) rotate(360deg);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  
   .pest-wcu-icon-box svg {
     width: 24px;
     height: 24px;
     fill: #ffffff;
+    transition: transform 0.3s ease;
+  }
+
+  .pest-wcu-feature-card:hover .pest-wcu-icon-box svg {
+    transform: scale(1.1);
   }
   
   .pest-wcu-text-box h3 {
@@ -191,6 +348,12 @@
     font-weight: 700;
     margin: 0 0 8px 0;
     color: #1F2937;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .pest-wcu-feature-card:hover .pest-wcu-text-box h3 {
+    color: #00C853;
+    transform: translateX(3px);
   }
   
   .pest-wcu-text-box p {
@@ -198,6 +361,11 @@
     line-height: 1.5;
     color: #666;
     margin: 0;
+    transition: color 0.3s ease;
+  }
+
+  .pest-wcu-feature-card:hover .pest-wcu-text-box p {
+    color: #333;
   }
 
   .pest-wcu-col-mid{
@@ -205,6 +373,11 @@
     margin-left: -40px;
   }
   
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+
   /* Responsive */
   @media (max-width: 992px) {
     .pest-wcu-grid {
@@ -232,8 +405,8 @@
     <div class="pest-wcu-grid">
       
       <div class="pest-wcu-col-left">
-        <h2>Delivering reliable pest solutions with care and integrity</h2>
-        <p>Dictumst non morbi semper phasellus bibendum torquent malesuada. Ut fringilla aliquet sed mauris donec. Mattis ornare ac placerat maecenas inceptos fermentum.</p>
+        <h2 class="pest-wcu-title-left">Delivering reliable pest solutions with care and integrity</h2>
+        <p class="pest-wcu-desc-left">Dictumst non morbi semper phasellus bibendum torquent malesuada. Ut fringilla aliquet sed mauris donec. Mattis ornare ac placerat maecenas inceptos fermentum.</p>
         
         <ul class="pest-wcu-list">
           <li>
@@ -308,3 +481,186 @@
     </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Animate titles and descriptions
+    const titles = document.querySelectorAll('.pest-wcu-col-left h2, .pest-wcu-col-right h2');
+    titles.forEach((title, index) => {
+      observer.observe(title);
+    });
+
+    const descriptions = document.querySelectorAll('.pest-wcu-col-left p, .pest-wcu-col-right p');
+    descriptions.forEach(desc => {
+      observer.observe(desc);
+    });
+
+    // Animate image wrapper
+    const imgWrap = document.querySelector('.pest-wcu-img-wrap');
+    if (imgWrap) {
+      observer.observe(imgWrap);
+    }
+
+    // Animate badge with delay
+    const badge = document.querySelector('.pest-wcu-badge');
+    if (badge) {
+      const badgeObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.add('animate');
+            }, 400);
+            badgeObserver.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+      badgeObserver.observe(badge);
+    }
+
+    // Animate list items with stagger effect
+    const listItems = document.querySelectorAll('.pest-wcu-list li');
+    const listObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          listItems.forEach((item, index) => {
+            setTimeout(() => {
+              item.classList.add('animate');
+              const checkIcon = item.querySelector('.pest-wcu-check-icon');
+              if (checkIcon) {
+                setTimeout(() => {
+                  checkIcon.classList.add('animate');
+                }, 100);
+              }
+            }, index * 150);
+          });
+          listObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    const list = document.querySelector('.pest-wcu-list');
+    if (list) {
+      listObserver.observe(list);
+    }
+
+    // Animate button
+    const button = document.querySelector('.pest-wcu-btn');
+    if (button) {
+      observer.observe(button);
+    }
+
+    // Animate feature cards with stagger
+    const featureCards = document.querySelectorAll('.pest-wcu-feature-card');
+    const cardsObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          featureCards.forEach((card, index) => {
+            setTimeout(() => {
+              card.classList.add('animate');
+              const iconBox = card.querySelector('.pest-wcu-icon-box');
+              if (iconBox) {
+                setTimeout(() => {
+                  iconBox.classList.add('animate');
+                }, 200);
+              }
+            }, index * 200);
+          });
+          cardsObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    const rightCol = document.querySelector('.pest-wcu-col-right');
+    if (rightCol) {
+      cardsObserver.observe(rightCol);
+    }
+
+    // Add number counter animation for badge
+    const badgeNum = document.querySelector('.pest-wcu-badge-num');
+    if (badgeNum && badge) {
+      const badgeNumObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const target = parseInt(badgeNum.textContent.replace(/\D/g, ''));
+            let current = 0;
+            const increment = target / 30;
+            const timer = setInterval(() => {
+              current += increment;
+              if (current >= target) {
+                current = target;
+                clearInterval(timer);
+              }
+              badgeNum.textContent = Math.floor(current) + '+';
+            }, 30);
+            badgeNumObserver.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+      badgeNumObserver.observe(badge);
+    }
+
+    // Enhanced hover effects for cards
+    featureCards.forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+      });
+    });
+
+    // Add click effect to button
+    if (button) {
+      button.addEventListener('click', function(e) {
+        const ripple = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        ripple.style.position = 'absolute';
+        ripple.style.borderRadius = '50%';
+        ripple.style.background = 'rgba(255, 255, 255, 0.5)';
+        ripple.style.transform = 'scale(0)';
+        ripple.style.animation = 'ripple-animation 0.6s ease-out';
+        ripple.style.pointerEvents = 'none';
+        ripple.style.zIndex = '10';
+        
+        this.style.position = 'relative';
+        this.style.overflow = 'hidden';
+        this.appendChild(ripple);
+        
+        setTimeout(() => {
+          ripple.remove();
+        }, 600);
+      });
+    }
+
+    // Add ripple animation keyframes
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes ripple-animation {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  });
+</script>

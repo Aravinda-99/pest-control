@@ -28,6 +28,12 @@
     z-index: 0;
     background-image: radial-gradient(rgba(255,255,255,0.2) 1px, transparent 1px);
     background-size: 15px 15px;
+    transform: translateY(-100%);
+    transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .pest-services__bg-accent.animate {
+    transform: translateY(0);
   }
 
   /* Content Container */
@@ -59,6 +65,14 @@
     border-radius: 20px;
     margin-bottom: 15px;
     letter-spacing: 0.5px;
+    opacity: 0;
+    transform: scale(0.5) rotate(-10deg);
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .pest-services__badge.animate {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
   }
 
   .pest-services__title {
@@ -68,6 +82,14 @@
     margin: 0;
     line-height: 1.2;
     max-width: 500px;
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .pest-services__title.animate {
+    opacity: 1;
+    transform: translateX(0);
   }
 
   .pest-services__desc {
@@ -77,6 +99,14 @@
     line-height: 1.6;
     font-weight: 500;
     padding-bottom: 5px;
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .pest-services__desc.animate {
+    opacity: 1;
+    transform: translateX(0);
   }
 
   /* --- SLIDER CONTAINER --- */
@@ -115,12 +145,21 @@
     padding: 24px;
     box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
     scroll-snap-align: start; 
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateY(60px) rotateX(15deg);
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
+
+  .pest-service-card.animate {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
   }
 
   .pest-service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.15);
+    transform: translateY(-10px) rotateY(5deg) scale(1.02);
+    box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.25);
   }
 
   .pest-service-card__header {
@@ -149,6 +188,12 @@
     font-weight: 700;
     color: var(--pest-dark-text);
     margin: 0;
+    transition: all 0.3s ease;
+  }
+
+  .pest-service-card:hover .pest-service-card__title {
+    color: rgb(0, 185, 46);
+    transform: translateX(5px);
   }
 
   .pest-service-card__img-wrapper {
@@ -156,17 +201,20 @@
     height: 180px;
     border-radius: 8px;
     overflow: hidden;
+    position: relative;
   }
 
   .pest-service-card__img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: brightness(0.9);
   }
   
   .pest-service-card:hover .pest-service-card__img {
-      transform: scale(1.05);
+    transform: scale(1.1) rotate(2deg);
+    filter: brightness(1.1);
   }
 
   /* --- Footer Actions --- */
@@ -185,23 +233,117 @@
     font-size: 14px;
     text-transform: uppercase;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     text-align: center;
     display: inline-block;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+
+  .pest-btn-base.animate {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .pest-btn-base::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  .pest-btn-base:hover::before {
+    width: 400px;
+    height: 400px;
+  }
+
+  .pest-btn-base span {
+    position: relative;
+    z-index: 1;
   }
 
   .pest-btn-yellow {
     background-color: var(--pest-yellow);
     color: var(--pest-dark-text);
   }
-  .pest-btn-yellow:hover { background-color: #d9a507; }
+  .pest-btn-yellow:hover { 
+    background-color: #d9a507;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(217, 165, 7, 0.4);
+  }
 
   .pest-btn-dark {
     background-color: var(--pest-dark-text);
     color: var(--pest-white);
   }
-  .pest-btn-dark:hover { background-color: #000000; }
+  .pest-btn-dark:hover { 
+    background-color: #000000;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(31, 41, 55, 0.4);
+  }
 
+  .pest-btn {
+    background-color: rgb(0, 185, 46);
+    color: #ffffff;
+  }
+  .pest-btn:hover {
+    background-color: rgb(0, 220, 55);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 185, 46, 0.4);
+  }
+
+
+  /* Animation Keyframes */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  .pest-service-card__img-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    transition: left 0.5s;
+  }
+
+  .pest-service-card:hover .pest-service-card__img-wrapper::after {
+    left: 100%;
+  }
+
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
 
   /* Mobile Responsive */
   @media (max-width: 768px) {
@@ -308,8 +450,8 @@
     </div>
 
     <div class="pest-services__actions">
-      <!-- <a href="#" class="pest-btn-base pest-btn-yellow">VIEW ALL SERVICES</a> -->
-      <a href="#" class="pest-btn-base pest-btn">GET A QUOTE</a>
+      <!-- <a href="#" class="pest-btn-base pest-btn-yellow"><span>VIEW ALL SERVICES</span></a> -->
+      <a href="#" class="pest-btn-base pest-btn"><span>GET A QUOTE</span></a>
     </div>
 
   </div>
@@ -317,45 +459,148 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    // Auto-slide functionality
     const slider = document.getElementById('pestSlider');
     let autoSlideInterval;
 
-    // Function to handle the sliding logic
     const startAutoSlide = () => {
       autoSlideInterval = setInterval(() => {
         if (!slider) return;
 
-        // පළමු කාඩ්පතේ ප්‍රමාණය ගෙන slide විය යුතු ප්‍රමාණය ගණනය කිරීම
         const firstCard = slider.querySelector('.pest-service-card');
-        const gap = 30; // CSS හි ඇති gap අගය
+        const gap = 30;
         const scrollAmount = firstCard.offsetWidth + gap;
-
-        // Check if we are near the end of the scroll
         const maxScroll = slider.scrollWidth - slider.clientWidth;
         
-        // If we are close to the end (within 10px), scroll back to start
         if (slider.scrollLeft >= maxScroll - 10) {
           slider.scrollTo({ left: 0, behavior: 'smooth' });
         } else {
-          // Otherwise slide to the next card
           slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
         }
-      }, 3000); // Slides every 3 seconds
+      }, 3000);
     };
 
     const stopAutoSlide = () => {
       clearInterval(autoSlideInterval);
     };
 
-    // Initialize
     if (slider) {
       startAutoSlide();
-
-      // Pause when mouse enters (so user can read)
       slider.addEventListener('mouseenter', stopAutoSlide);
-      
-      // Resume when mouse leaves
       slider.addEventListener('mouseleave', startAutoSlide);
     }
+
+    // Scroll-triggered animations using Intersection Observer
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Animate background accent
+    const bgAccent = document.querySelector('.pest-services__bg-accent');
+    if (bgAccent) {
+      observer.observe(bgAccent);
+    }
+
+    // Animate header elements
+    const badge = document.querySelector('.pest-services__badge');
+    const title = document.querySelector('.pest-services__title');
+    const desc = document.querySelector('.pest-services__desc');
+
+    if (badge) observer.observe(badge);
+    if (title) observer.observe(title);
+    if (desc) observer.observe(desc);
+
+    // Animate service cards with stagger effect
+    const cards = document.querySelectorAll('.pest-service-card');
+    const cardsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          cards.forEach((card, index) => {
+            setTimeout(() => {
+              card.classList.add('animate');
+            }, index * 150); // Stagger delay
+          });
+          cardsObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    const sliderContainer = document.querySelector('.pest-slider-relative');
+    if (sliderContainer) {
+      cardsObserver.observe(sliderContainer);
+    }
+
+    // Animate buttons
+    const buttons = document.querySelectorAll('.pest-btn-base');
+    buttons.forEach((btn, index) => {
+      observer.observe(btn);
+    });
+
+    // Add parallax effect to background on scroll
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      if (bgAccent && currentScroll > lastScroll) {
+        bgAccent.style.transform = `translateY(${Math.min(currentScroll * 0.1, 20)}px)`;
+      }
+      lastScroll = currentScroll;
+    });
+
+    // Enhanced card hover effects
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+      });
+
+      // Add click ripple effect
+      card.addEventListener('click', function(e) {
+        const ripple = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        ripple.style.position = 'absolute';
+        ripple.style.borderRadius = '50%';
+        ripple.style.background = 'rgba(0, 185, 46, 0.3)';
+        ripple.style.transform = 'scale(0)';
+        ripple.style.animation = 'ripple-animation 0.6s ease-out';
+        ripple.style.pointerEvents = 'none';
+        ripple.style.zIndex = '10';
+        
+        this.style.position = 'relative';
+        this.style.overflow = 'hidden';
+        this.appendChild(ripple);
+        
+        setTimeout(() => {
+          ripple.remove();
+        }, 600);
+      });
+    });
+
+    // Add ripple animation keyframes
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes ripple-animation {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
   });
 </script>

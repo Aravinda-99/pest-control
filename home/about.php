@@ -62,6 +62,13 @@
     border-radius: 8px;
     overflow: hidden;
     position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .pest-image-wrapper:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
   }
 
   .pest-main-img {
@@ -69,6 +76,11 @@
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .pest-image-wrapper:hover .pest-main-img {
+    transform: scale(1.05);
   }
 
   /* Content Column */
@@ -131,6 +143,14 @@
     color: var(--pest-text);
     margin-bottom: 12px;
     font-size: 15px;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.4s ease;
+  }
+
+  .pest-features li.animate {
+    opacity: 1;
+    transform: translateX(0);
   }
 
   .check-icon {
@@ -142,7 +162,20 @@
     align-items: center;
     justify-content: center;
     margin-right: 12px;
-    flex-shrink: 0; /* Prevents icon from squishing */
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  .check-icon.animate {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  .pest-features li:hover .check-icon {
+    transform: scale(1.2) rotate(360deg);
+    background-color: rgb(29, 224, 78);
   }
 
   .pest-small-text {
@@ -170,11 +203,38 @@
     font-weight: 700;
     font-size: 14px;
     text-transform: uppercase;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pest-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  .pest-btn:hover::before {
+    width: 300px;
+    height: 300px;
   }
 
   .pest-btn:hover {
-    background-color: rgb(29, 224, 78); /* Darker shade on hover */
+    background-color: rgb(29, 224, 78);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(13, 139, 45, 0.4);
+  }
+
+  .pest-btn:active {
+    transform: translateY(0);
   }
 
   .pest-contact {
@@ -192,6 +252,24 @@
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 10px rgba(30, 136, 229, 0.3);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    animation: pulse 2s infinite;
+  }
+
+  .pest-phone-icon:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 6px 20px rgba(13, 139, 45, 0.5);
+    background-color: rgb(29, 224, 78);
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      box-shadow: 0 4px 10px rgba(30, 136, 229, 0.3);
+    }
+    50% {
+      box-shadow: 0 4px 20px rgba(13, 139, 45, 0.6);
+    }
   }
 
   .pest-phone-icon svg {
@@ -228,6 +306,66 @@
     border-radius: 50%;
     z-index: 0;
     pointer-events: none;
+    animation: rotate 20s linear infinite;
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Animation Classes */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .fade-in.animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .slide-in-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .slide-in-left.animate {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .slide-in-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .slide-in-right.animate {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .scale-in {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .scale-in.animate {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
   }
 </style>
 
@@ -235,25 +373,25 @@
   <div class="pest-container">
     <div class="pest-grid">
       
-      <div class="pest-image-wrapper">
+      <div class="pest-image-wrapper slide-in-left">
         <img src="asset/image/pestman.jpg" alt="Pest Control Expert in PPE" class="pest-main-img">
       </div>
 
       <div class="pest-content-wrapper">
         
-        <span class="pest-badge">ABOUT US</span>
+        <span class="pest-badge fade-in">ABOUT US</span>
 
-        <h2 class="pest-title">Pest Control Services From The Experts</h2>
+        <h2 class="pest-title fade-in">Pest Control Services From The Experts</h2>
         
-        <p class="pest-highlight">
+        <p class="pest-highlight fade-in">
           We are an award-winning pest control company with over 20 years experience in the business.
         </p>
 
-        <p class="pest-desc">
+        <p class="pest-desc fade-in">
           We provide a wide range of services for residential, commercial, and industrial level clients.
         </p>
 
-        <p class="pest-desc">
+        <p class="pest-desc fade-in">
           No job is too big or too small, we've got you covered. In addition to our services, you can check out our shop for a wide range of pest control supplies and equipment. When it comes to pest control we are your one-stop shop.
         </p>
 
@@ -278,11 +416,11 @@
           </li>
         </ul>
 
-        <p class="pest-small-text">
+        <p class="pest-small-text fade-in">
           Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.
         </p>
 
-        <div class="pest-actions">
+        <div class="pest-actions fade-in">
           <a href="#" class="pest-btn">LEARN MORE</a>
           
           <div class="pest-contact">
@@ -302,3 +440,114 @@
   
   <div class="pest-pattern-overlay"></div>
 </section>
+
+<script>
+  // Intersection Observer for scroll animations
+  document.addEventListener('DOMContentLoaded', function() {
+    // Create observer with options
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Observe all elements with animation classes
+    const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in');
+    animatedElements.forEach(el => {
+      observer.observe(el);
+    });
+
+    // Animate list items with stagger effect
+    const listItems = document.querySelectorAll('.pest-features li');
+    const listObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          listItems.forEach((item, index) => {
+            setTimeout(() => {
+              item.classList.add('animate');
+              const checkIcon = item.querySelector('.check-icon');
+              if (checkIcon) {
+                setTimeout(() => {
+                  checkIcon.classList.add('animate');
+                }, 200);
+              }
+            }, index * 150); // Stagger delay
+          });
+          listObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    const featuresList = document.querySelector('.pest-features');
+    if (featuresList) {
+      listObserver.observe(featuresList);
+    }
+
+    // Add smooth hover effects for contact section
+    const phoneIcon = document.querySelector('.pest-phone-icon');
+    if (phoneIcon) {
+      phoneIcon.addEventListener('mouseenter', function() {
+        this.style.animation = 'none';
+        setTimeout(() => {
+          this.style.animation = 'pulse 2s infinite';
+        }, 10);
+      });
+    }
+
+    // Add click animation to button
+    const learnMoreBtn = document.querySelector('.pest-btn');
+    if (learnMoreBtn) {
+      learnMoreBtn.addEventListener('click', function(e) {
+        // Create ripple effect
+        const ripple = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        ripple.classList.add('ripple');
+        
+        this.appendChild(ripple);
+        
+        setTimeout(() => {
+          ripple.remove();
+        }, 600);
+      });
+    }
+  });
+
+  // Add CSS for ripple effect
+  const style = document.createElement('style');
+  style.textContent = `
+    .pest-btn {
+      position: relative;
+      overflow: hidden;
+    }
+    .pest-btn .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.6);
+      transform: scale(0);
+      animation: ripple-animation 0.6s ease-out;
+      pointer-events: none;
+    }
+    @keyframes ripple-animation {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+</script>

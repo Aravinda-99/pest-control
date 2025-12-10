@@ -258,7 +258,7 @@ if ($include_type == 'css') {
         <div class="top-bar container">
             <div class="logo">
                 <i class="fa-solid fa-bug logo-icon"></i>
-                <span class="logo-text">pestraid<small>..Pest Control</small></span>
+                <span class="logo-text">Pest control<small></small></span>
             </div>
 
             <div class="contact-group">
